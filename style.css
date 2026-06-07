@@ -347,3 +347,143 @@ i { margin-right: 8px; }
     width: auto;
     object-fit: contain;
 }
+
+/* ==========================================================================
+   7. 📱 PROFESSIONAL SMARTPHONE RESPONSIVE BREAKPOINTS (100% PHONE COMPATIBLE)
+   (TIPPANI: Yeh code aapke 20 agents ke liye pure mobile scrolling aur UI ko set karega)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* 1. Main Layout Reset */
+    body {
+        overflow-y: auto !important; /* Full vertical movement enabled */
+        background-color: #f8fafc;
+    }
+    
+    .crm-main-layout {
+        display: flex;
+        flex-direction: column; /* Saare columns ek ke niche ek aane lagenge */
+        padding: 12px;
+        gap: 16px;
+        height: auto; /* Box lock remove */
+    }
+
+    /* 2. Header Adjustment */
+    .crm-header {
+        padding: 0 12px;
+        height: 65px;
+        flex-wrap: wrap;
+    }
+    
+    .crm-header .logo {
+        gap: 6px;
+    }
+    
+    .header-logo-img {
+        height: 32px; /* Logo thoda sleek kiya phone ke liye */
+    }
+    
+    .crm-header .logo span {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .user-profile {
+        gap: 10px;
+        font-size: 13px;
+    }
+    
+    .btn-logout-icon {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .stats-bar {
+        display: none; /* Phone screen par space bachane ke liye shift counter status hidden */
+    }
+
+    /* 3. Customer Profile & Dynamic Boxes Grid */
+    .customer-profile-card {
+        padding: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .customer-name {
+        font-size: 24px; /* Name heading scaling fixed */
+        margin-bottom: 15px;
+    }
+    
+    /* 🟢 SMART MATRIX FOR MOBILE: 2 Columns me set kiya taaki lambi list na bane */
+    .details-grid {
+        grid-template-columns: 1fr 1fr !important; 
+        gap: 8px;
+    }
+    
+    .detail-box {
+        padding: 10px 12px;
+    }
+    
+    .detail-box label {
+        font-size: 9px;
+        letter-spacing: 0px;
+    }
+    
+    .detail-value {
+        font-size: 14px;
+    }
+    
+    .text-blue {
+        font-size: 15px; /* Phone number display fixed */
+    }
+
+    /* 4. Sticky Launch Call Button */
+    .btn-big-call {
+        position: -webkit-sticky;
+        position: sticky;
+        bottom: 12px; /* Bottom edge touch panel area comfort lock */
+        z-index: 9999;
+        padding: 14px;
+        font-size: 16px;
+        box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+        margin-top: 20px;
+    }
+
+    /* 5. Feedback Logger Form */
+    .feedback-card {
+        padding: 16px;
+    }
+    
+    .feedback-card h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .form-group input, .form-group select, .form-group textarea {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    /* 6. Admin Panel Responsive Tweaks */
+    .admin-container-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .admin-sidebar {
+        height: auto;
+        padding: 15px;
+    }
+    
+    .admin-main-content {
+        padding: 15px;
+    }
+    
+    .admin-summary-strip {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .report-table th, .report-table td {
+        padding: 10px;
+        font-size: 12px;
+    }
+}
