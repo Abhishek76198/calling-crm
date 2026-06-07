@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Loan Calling CRM - Auto Adaptive Pro</title>
+    <link rel="icon" type="image/png" href="Abhi Name text png.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="loginScreen" class="login-container">
+        <div class="login-card">
+            <div class="login-icon-header">
+                <img src="Abhi Name text png.png" alt="CRM Logo" class="login-logo-img">
+            </div>
+            <h2>CRM Portal Login</h2>
+            <p>Admin / Agent Secure Dashboard Access</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-envelope"></i> Registered Email ID</label>
+                    <input type="email" id="loginEmail" placeholder="username@crm.com" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-save-next"><i class="fa-solid fa-right-to-bracket"></i> Secure Sign In</button>
+                <p id="loginError" class="login-error-msg"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="adminDashboard" class="screen hidden">
+        <div class="admin-container-layout">
+            <div class="admin-sidebar">
+                <div class="admin-brand"><i class="fa-solid fa-shield-cat"></i> Master Control</div>
+                <button class="admin-tab-btn active" onclick="switchAdminTab('tab-upload', event)"><i class="fa-solid fa-cloud-arrow-up"></i> Bulk Upload Data</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('tab-users', event)"><i class="fa-solid fa-user-gear"></i> Create User/Agent</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('tab-reports', event)"><i class="fa-solid fa-chart-pie"></i> Call Reports</button>
+                <button class="admin-tab-btn" onclick="switchAdminTab('tab-leads', event)"><i class="fa-solid fa-server"></i> All Leads Pool</button>
+                <button onclick="logout()" class="admin-logout-btn"><i class="fa-solid fa-power-off"></i> Log Out Panel</button>
+            </div>
+
+            <div class="admin-main-content">
+                <div class="admin-summary-strip">
+                    <div class="strip-card yellow-strip">
+                        <div class="strip-icon"><i class="fa-solid fa-folder-open"></i></div>
+                        <div><label>Fresh Pool Leads</label><h2 id="adminUncalledCount">0 Leads</h2></div>
+                    </div>
+                    <div class="strip-card green-strip">
+                        <div class="strip-icon"><i class="fa-solid fa-phone-slash"></i></div>
+                        <div><label>Processed Calls Logged</label><h2 id="adminTotalCalls">0 Calls</h2></div>
+                    </div>
+                </div>
+
+                <div id="tab-upload" class="admin-tab-content">
+                    <div class="feedback-card">
+                        <h3><i class="fa-solid fa-file-csv"></i> Upload Bulk Excel/CSV File</h3>
+                        <div style="margin: 15px 0;"><button type="button" onclick="downloadCRMTemplate()" class="btn-save-next btn-purple" style="width: auto; padding: 10px 20px; font-size: 14px;"><i class="fa-solid fa-file-arrow-down"></i> Download Standard Template (.csv)</button></div>
+                        <div class="upload-dropzone">
+                            <i class="fa-solid fa-file-excel dropzone-icon"></i>
+                            <input type="file" id="excelFileInput" accept=".csv, .xlsx, .xls"><br><br>
+                            <button type="button" onclick="handleBulkUpload()" class="btn-save-next btn-success"><i class="fa-solid fa-play"></i> Parse & Run Bulk Upload</button>
+                        </div>
+                    </div>
+                    <div class="customer-profile-card table-card">
+                        <h3><i class="fa-solid fa-eye"></i> Uploaded Data Preview</h3>
+                        <table class="report-table">
+                            <thead><tr><th>Customer Name</th><th>Mobile Number</th><th>Salary</th><th>Existing Bank</th><th>Loan Amount</th><th>Status</th></tr></thead>
+                            <tbody id="bulkPreviewTable"><tr><td colspan="6" class="td-empty">Naya data upload karne par preview yahan dikhega.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-users" class="admin-tab-content hidden">
+                    <div class="feedback-card max-form-width">
+                        <h3><i class="fa-solid fa-user-plus"></i> Generate System ID Accounts</h3>
+                        <form id="createAgentForm">
+                            <div class="form-group"><label>System Authority Level</label><select id="newUserRole" required><option value="Agent">Agent</option><option value="Admin">Admin</option></select></div>
+                            <div class="form-group"><label>Account User Full Name</label><input type="text" id="newAgentName" placeholder="Subham Kumar" required></div>
+                            <div class="form-group"><label>Login Email ID</label><input type="email" id="newAgentEmail" placeholder="agent@crm.com" required></div>
+                            <div class="form-group"><label>System Password</label><input type="password" id="newAgentPass" placeholder="Set secure password" required></div>
+                            <button type="submit" class="btn-save-next btn-purple"><i class="fa-solid fa-circle-check"></i> Create Account Access</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="tab-reports" class="admin-tab-content hidden">
+                    <div class="customer-profile-card table-card">
+                        <h3><i class="fa-solid fa-chart-line"></i> Date-wise Productivity Tracker</h3>
+                        <table class="report-table">
+                            <thead><tr><th>Date</th><th>Agent Name</th><th>Customer Name</th><th>Phone</th><th>Status</th><th>Remarks</th></tr></thead>
+                            <tbody id="reportTableBody"><tr><td colspan="6" class="td-empty">Filhal koi calling report maujood nahi hai.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-leads" class="admin-tab-content hidden">
+                    <div class="customer-profile-card table-card">
+                        <h3><i class="fa-solid fa-database"></i> Total Live Central Leads Pool</h3>
+                        <table class="report-table">
+                            <thead><tr><th>ID</th><th>Customer Name</th><th>Phone</th><th>Assigned To</th><th>Current Status</th></tr></thead>
+                            <tbody id="leadsPoolTableBody"><tr><td colspan="5" class="td-empty">Lead pool khali hai.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="agentDashboard" class="screen hidden">
+        <div class="crm-header">
+            <div class="logo"><img src="Abhi Name text png.png" alt="CRM Logo" class="header-logo-img"><i class="fa-solid fa-headset"></i> Secure Agent Calling Suite</div>
+            <div class="stats-bar"><span class="badge badge-green"><i class="fa-solid fa-phone-flip"></i> Today Shifts Calls: <span id="todayCalls">0</span></span></div>
+            <div class="user-profile">
+                <span id="agentNameDisplay"><i class="fa-solid fa-circle-user"></i> Sync Agent...</span><button onclick="logout()" class="btn-logout-icon"><i class="fa-solid fa-power-off"></i> Log Out</button></div>
+        </div>
+
+        <div class="crm-main-layout">
+            <div class="crm-sidebar"><button class="side-btn active"><i class="fa-solid fa-square-phone"></i> Calling Pad Active</button></div>
+
+            <div class="customer-profile-card">
+                <div class="profile-header">
+                    <span class="lead-tag-new" id="leadStatusTag">New</span>
+                    <span class="lead-id"><i class="fa-solid fa-hashtag"></i> UID: <span id="leadIdDisplay">------</span></span>
+                </div>
+                <h1 id="currentLeadName" class="customer-name">WAITING FOR DATA POOL...</h1>
+
+                <div id="dynamicFieldsContainer" class="details-grid">
+                    <div class="detail-box" id="box_phone"><label><i class="fa-solid fa-phone"></i> Mobail Number</label><div id="currentLeadPhone" class="detail-value text-blue">----------</div></div>
+                    <div class="detail-box" id="box_pan"><label><i class="fa-solid fa-id-card"></i> Pan Card Number</label><div id="customerPan" class="detail-value">---</div></div>
+                    <div class="detail-box" id="box_amount"><label><i class="fa-solid fa-money-bill-wave"></i> Loan Amount</label><div id="existingLoanAmount" class="detail-value text-red font-bold">₹0</div></div>
+                    <div class="detail-box" id="box_roi"><label><i class="fa-solid fa-percent"></i> ROI (Interest Rate)</label><div id="customerCompany" class="detail-value">---</div></div>
+                    <div class="detail-box" id="box_emi"><label><i class="fa-solid fa-receipt"></i> EMI Amount</label><div id="customerEmi" class="detail-value font-bold">₹0</div></div>
+                    <div class="detail-box" id="box_tenure"><label><i class="fa-solid fa-calendar-minus"></i> Tenure (Months)</label><div id="customerTenure" class="detail-value">---</div></div>
+                    <div class="detail-box" id="box_location"><label><i class="fa-solid fa-map-location-dot"></i> Location</label><div id="customerLocation" class="detail-value">---</div></div>
+                    <div class="detail-box" id="box_date"><label><i class="fa-solid fa-calendar-check"></i> Loan Date</label><div id="customerLoanDate" class="detail-value">---</div></div>
+                    <div class="detail-box" id="box_salary"><label><i class="fa-solid fa-wallet"></i> Salary</label><div id="customerSalary" class="detail-value">₹0</div></div>
+                    <div class="detail-box" id="box_designation"><label><i class="fa-solid fa-user-tie"></i> Designation</label><div id="customerDesignation" class="detail-value">---</div></div>
+                    <div class="detail-box" id="box_company"><label><i class="fa-solid fa-building"></i> Company Name</label><div id="customerCompanyName" class="detail-value">---</div></div>
+                    <div class="detail-box" id="box_loantype"><label><i class="fa-solid fa-hand-holding-dollar"></i> Loan Type</label><div id="loanType" class="detail-value font-bold">---</div></div>
+                </div>
+                <a href="#" id="dialBtn" class="btn-big-call"><i class="fa-solid fa-phone-volume"></i> Click To Launch Call</a>
+            </div>
+
+            <div class="feedback-card">
+                <h3><i class="fa-solid fa-file-pen"></i> Call Process Form Logs</h3>
+                <form id="remarkForm">
+                    <div class="form-group">
+                        <label class="required-label">Call Result Disposition</label>
+                        <select id="callStatus" required>
+                            <option value="">-- Dropdown Selection Mandate * --</option>
+                            <option value="Busy">Busy</option>
+                            <option value="Call Back">Call Back</option>
+                            <option value="Documents pending">Documents pending</option>
+                            <option value="Followup">Followup</option>
+                            <option value="Hangup">Hangup</option>
+                            <option value="Ringing">Ringing</option>
+                            <option value="Incoming Call Not">Incoming Call Not</option>
+                            <option value="No required">No required</option>
+                            <option value="Not Connected">Not Connected</option>
+                            <option value="Not Interested">Not Interested</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Switchoff">Switchoff</option>
+                            <option value="Voice Mail">Voice Mail</option>
+                            <option value="Not Eligible">Not Eligible</option>
+                            <option value="Disburse">Disburse</option>
+                            <option value="File Reject">File Reject</option>
+                            <option value="Invalid Number">Invalid Number</option>
+                            <option value="Documents Updated">Documents Updated</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Conversation Notes Summary Remarks</label>
+                        <textarea id="callRemark" placeholder="Aapki batch notes call ki details yahan submit karein..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-save-next btn-blue-glow"><i class="fa-solid fa-floppy-disk"></i> Commit Log & Load Next Lead</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlertModal" class="modal-overlay hidden">
+        <div class="modal-alert-card">
+            <div id="modalAlertIcon" class="modal-alert-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 id="modalAlertTitle">System Status</h3>
+            <p id="modalAlertMsg">Notification message goes here...</p>
+            <button onclick="closeCustomAlert()" class="btn-save-next btn-blue-glow" style="width: auto; padding: 10px 30px; font-size: 15px; margin-top: 10px;">OK</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

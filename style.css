@@ -1,0 +1,349 @@
+* {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4f7fa; 
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+    color: #334155; 
+    height: 100vh; 
+    overflow-y: auto; 
+}
+
+.hidden { display: none !important; }
+i { margin-right: 8px; }
+
+.login-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    background: radial-gradient(circle at top left, #1e293b, #0f172a); 
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95); 
+    padding: 40px;
+    border-radius: 16px; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    border-top: 6px solid #2563eb; 
+    transition: transform 0.3s ease; 
+}
+
+.login-card:hover { transform: translateY(-5px); }
+.login-icon-header { font-size: 48px; color: #2563eb; margin-bottom: 15px; }
+.login-card h2 { font-size: 26px; color: #1e293b; font-weight: 700; }
+.login-card p { color: #64748b; font-size: 14px; margin-bottom: 25px; }
+
+.screen { height: 100vh; display: flex; flex-direction: column; }
+.form-group { margin-bottom: 20px; text-align: left; } 
+.form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1e293b;
+    background-color: #fff;
+    outline: none;
+    transition: all 0.2s ease-in-out; 
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+.form-group textarea { height: 110px; resize: none; } 
+
+.btn-save-next {
+    width: 100%;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-save-next:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3); }
+.btn-save-next:active { transform: translateY(0); } 
+
+.btn-success { background: #16a34a; box-shadow: 0 4px 6px rgba(22, 163, 74, 0.2); }
+.btn-success:hover { background: #15803d; box-shadow: 0 6px 12px rgba(22, 163, 74, 0.3); }
+.btn-purple { background: #7c3aed; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.2); }
+.btn-purple:hover { background: #6d28d9; box-shadow: 0 6px 12px rgba(124, 58, 237, 0.3); }
+.btn-blue-glow { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+.admin-container-layout { display: grid; grid-template-columns: 270px 1fr; height: 100vh; }
+
+.admin-sidebar {
+    background-color: #0f172a; 
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+}
+.admin-brand { color: #ffffff; font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 30px; letter-spacing: 0.5px; border-bottom: 1px solid #1e293b; padding-bottom: 15px; }
+
+.admin-tab-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.admin-tab-btn:hover { background-color: #1e293b; color: #f8fafc; padding-left: 20px; } 
+.admin-tab-btn.active { background-color: #2563eb !important; color: #ffffff; font-weight: 600; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2); }
+
+.admin-logout-btn {
+    background-color: #1e293b;
+    color: #f87171;
+    border: 1px solid #334155;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s;
+    margin-top: auto; 
+}
+.admin-logout-btn:hover { background-color: #ef4444; color: white; }
+
+.admin-main-content { padding: 30px; overflow-y: auto; background-color: #f8fafc; }
+
+.admin-summary-strip { display: flex; gap: 24px; margin-bottom: 30px; }
+.strip-card { flex: 1; padding: 22px; border-radius: 12px; display: flex; align-items: center; gap: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+.strip-icon { font-size: 32px; opacity: 0.8; }
+.yellow-strip { background: #fef08a; border-left: 6px solid #eab308; color: #713f12; }
+.green-strip { background: #bbf7d0; border-left: 6px solid #22c55e; color: #14532d; }
+.strip-card label { font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+.strip-card h2 { font-size: 30px; margin-top: 4px; font-weight: 700; }
+
+.upload-dropzone {
+    border: 2px dashed #cbd5e1;
+    background: #f8fafc;
+    padding: 40px;
+    text-align: center;
+    border-radius: 12px;
+    margin-top: 15px;
+    transition: all 0.3s;
+}
+.upload-dropzone:hover { border-color: #2563eb; background: #f0f4ff; }
+.dropzone-icon { font-size: 48px; color: #94a3b8; margin-bottom: 15px; display: block; }
+
+.feedback-card, .customer-profile-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    margin-bottom: 25px;
+}
+.feedback-card h3, .customer-profile-card h3 { color: #1e293b; margin-bottom: 20px; font-size: 19px; font-weight: 600; }
+.max-form-width { max-width: 550px; }
+.table-card { padding: 20px; overflow-x: auto; } 
+
+.report-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; }
+.report-table th, .report-table td { border-bottom: 1px solid #e2e8f0; padding: 14px 18px; text-align: left; font-size: 14.5px; }
+.report-table th { background: #f8fafc; color: #475569; font-weight: 600; border-top: 1px solid #e2e8f0; }
+.report-table tr:hover { background-color: #f8fafc; }
+.td-empty { text-align: center; color: #94a3b8; padding: 30px !important; }
+
+.crm-header {
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 1px solid #e2e8f0;
+    height: 75px;
+}
+.crm-header .logo { font-size: 20px; font-weight: 700; color: #2563eb; }
+.user-profile { display: flex; align-items: center; gap: 20px; font-weight: 500; color: #475569; }
+
+.btn-logout-icon {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.btn-logout-icon:hover { background-color: #fee2e2; color: #ef4444; border-color: #fca5a5; }
+
+.crm-main-layout {
+    display: grid;
+    grid-template-columns: 210px 1fr 400px; 
+    gap: 24px;
+    padding: 24px;
+    height: calc(100vh - 75px);
+    background-color: #f4f7fa;
+}
+
+.crm-sidebar { background: white; padding: 15px 12px; border-radius: 12px; border: 1px solid #e2e8f0; height: fit-content; }
+.side-btn { width: 100%; text-align: left; padding: 12px 16px; background: #eff6ff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; color: #2563eb; }
+
+.customer-profile-card { border-top: 5px solid #2563eb; display: flex; flex-direction: column; }
+.profile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.lead-id { color: #64748b; font-size: 14px; font-weight: 600; }
+.customer-name { font-size: 32px; color: #0f172a; font-weight: 700; letter-spacing: -0.5px; text-transform: uppercase; }
+.customer-location { color: #64748b; font-size: 14px; margin-bottom: 24px; font-weight: 500; }
+
+.details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.detail-box {
+    background: #f8fafc;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.detail-box:hover { transform: scale(1.01); border-color: #cbd5e1; } 
+.detail-box label { font-size: 11px; color: #64748b; display: block; margin-bottom: 4px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+.detail-value { font-size: 17px; color: #1e293b; font-weight: 500; }
+
+.text-blue { color: #2563eb; font-weight: 700; font-size: 21px; }
+.text-red { color: #ef4444; }
+.font-bold { font-weight: 700; }
+.required-label::after { content: " *"; color: #ef4444; font-weight: bold; }
+
+.btn-big-call {
+    display: block;
+    text-align: center;
+    background-color: #16a34a; 
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: auto; 
+    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.25);
+    transition: all 0.2s;
+}
+.btn-big-call:hover { background-color: #15803d; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(22, 163, 74, 0.35); }
+
+/* MOBILE RESPONSIVE MEDIA QUERY */
+@media (max-width: 992px) {
+    .crm-main-layout { grid-template-columns: 1fr; height: auto; overflow-y: auto; padding: 15px; gap: 20px; }
+    .admin-container-layout { grid-template-columns: 1fr; }
+    .admin-sidebar { height: auto; }
+    .crm-sidebar { display: none; }
+    body { overflow-y: auto; }
+    .admin-summary-strip { flex-direction: column; gap: 15px; }
+    .btn-big-call { position: sticky; bottom: 5px; z-index: 999; }
+    .details-grid { grid-template-columns: 1fr; }
+}
+/* ==========================================================================
+   8. 🚀 PREMIUM GLASSMORPHIC POPUP NOTIFICATION MODAL SYSTEM STYLE
+   (TIPPANI: Windows ke beech me mast soft blur shadow aur dynamic scaling animation)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.6); /* TIPPANI: Translucent dark grey overlay filter */
+    backdrop-filter: blur(8px); /* 🟢 TIPPANI: Background ko dundhla (blur) karke premium apple glass effect dena */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* TIPPANI: CRM ke sabhi panels se hamesha upar rakhne ke liye highest priority order */
+    animation: fadeInBg 0.2s ease-out forwards;
+}
+
+.modal-alert-card {
+    background: #ffffff;
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 90%;
+    max-width: 440px;
+    text-align: center;
+    border-top: 5px solid #7c3aed; /* TIPPANI: Notification banner top purple accent line */
+    transform: scale(0.7) translateY(-30px); /* TIPPANI: Initial state starting position scaling for animation */
+    animation: bounceInCard 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* 🟢 TIPPANI: Realistic smooth bounce spring animation effect */
+}
+
+.modal-alert-icon {
+    font-size: 54px;
+    color: #16a34a; /* TIPPANI: Default success notification green icon color */
+    margin-bottom: 15px;
+}
+
+.modal-alert-card h3 {
+    font-size: 22px;
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.modal-alert-card p {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   ANIMATIONS KEYFRAMES DECLARATIONS
+   ========================================================================== */
+@keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceInCard {
+    from {
+        transform: scale(0.7) translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+/* ==========================================================================
+   9. 🎨 CUSTOM BRANDING LOGO STYLES
+   (TIPPANI: Logo ko login page aur header me perfectly fit karne ke liye styles)
+   ========================================================================== */
+
+/* Login screen par logo ka size aur design */
+.login-logo-img {
+    width: 100%;
+    max-width: 220px; /* TIPPANI: Login card ke hisab se perfect width set ki */
+    height: auto;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+/* Dashboard header me logo ko text ke sath barabar align karne ke liye */
+.crm-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo-img {
+    height: 45px; /* TIPPANI: Header bar ke andar chhota sleek look dene ke liye height 45px ki */
+    width: auto;
+    object-fit: contain;
+}
